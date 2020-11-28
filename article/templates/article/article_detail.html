@@ -1,0 +1,34 @@
+{% extends 'article/base.html' %}
+{% block content %}
+<div class="container mt-3">
+<div class="media">
+  <img style="height:100px; width:100px;" src="{{ post.image.url}}" class="align-self-start mr-3" alt="...">
+  <div class="media-body">
+    <h5 class="mt-0">{{ post.title}}</h5>
+    <small> by {{ post.author }}</small>
+    <p>{{ post.content}}</p>
+  </div>
+</div>
+
+
+
+
+<button type="button" class="btn-sm btn-primary mr-2" ta={{post.id}} id="like" >{% if is_liked %} liked {% else %} like{% endif %}</button>
+
+
+<form id="comment-form">
+<p>comment here</p>  <input type="text" 
+ id="article_comment" required>
+<button class="btn-sm btn-outline-primary" post_id="{{post.id}}" type="button" id="comment" type="reset">submit</button>
+<p id="warning"></p>
+</form>
+<p>comments</p>
+{% for commen in comments %}
+<div class="row">
+  <span><p> <b>{{commen.user}} -</b> {{commen.comment}} </p></span>
+  <hr>
+</div>
+{% endfor %}
+</div>
+<input type="hidden" name="csrfmiddlewaretoken" value="YRJ09zQnRj5MRFqWh7QOSoBZfWtBx8T8UIamSW5RdV7sBIFJVaAqFSv64skFkkJi">
+{% endblock content %}

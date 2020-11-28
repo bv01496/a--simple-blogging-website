@@ -1,0 +1,17 @@
+{% extends 'article/base.html' %}
+{% block content %}
+<div class="container mt-3">
+<div class="media">
+  <img style="height:100px; width:100px;" src="{{ post.image.url}}" class="align-self-start mr-3" alt="...">
+  <div class="media-body">
+    <h5 class="mt-0">{{ post.title}}</h5>
+    <small> by {{ post.author }}</small>
+    <p>{{ post.content}}</p>
+  </div>
+</div>
+<form method='POST' action='like'>
+<button class="btn btn-primary mr-2" type="submit" value={{post.id}}name="post_id">like</button>
+</form>
+<a class="btn btn-primary" href="#">share</a>
+</div>
+{% endblock content %}

@@ -1,0 +1,42 @@
+<script>
+$('#like').click(function(){
+    console.log('clicked');
+    let id = $(this).attr('ta');
+    let crf = $('input[name = csrfmiddlewaretoken]').val();
+    mydata = {idr :id, csrfmiddlewaretoken: crf };
+    butt = $(this)
+    $.ajax({
+        url : "{% url 'article-like' %}",
+        method : 'POST',
+        data : mydata,
+        dataType : 'json',
+        success : function(data){
+            console.log(data.status)
+            butt.text(data.status) 
+        }
+    });
+});
+$('#comment').click(function(){
+    comment = $('#article_comment').val()
+    post_id = $(this).attr('post_id')
+    let crf = $('input[name = csrfmiddlewaretoken]').val();
+    if (comment == ""){
+        $('#warning').text('enter ur comment then enter submit');
+    }
+    else {
+        $('#warning').text("");
+    $.ajax({
+        url : "{% url 'article-comment' %}",
+        method : 'POST',
+        dataType : 'json',
+        data : {comment : comment, post_id : post_id, csrfmiddlewaretoken: crf },
+        success : function(data){
+            $('#comment-form')[0].reset();
+            console.log(data.status)
+        }
+        
+
+    });
+}
+});
+</script>
